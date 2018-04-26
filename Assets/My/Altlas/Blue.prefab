@@ -318,10 +318,10 @@ MonoBehaviour:
     y: 5
     width: 27
     height: 18
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
+    borderLeft: 3
+    borderRight: 2
+    borderTop: 3
+    borderBottom: 2
     paddingLeft: 0
     paddingRight: 0
     paddingTop: 0
