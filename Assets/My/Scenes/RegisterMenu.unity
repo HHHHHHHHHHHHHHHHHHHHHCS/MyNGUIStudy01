@@ -281,7 +281,7 @@ MonoBehaviour:
   mFontStyle: 0
   mAlignment: 0
   mEncoding: 1
-  mMaxLineCount: 0
+  mMaxLineCount: 1
   mEffectStyle: 0
   mEffectColor: {r: 0, g: 0, b: 0, a: 1}
   mSymbols: 1
@@ -690,7 +690,7 @@ MonoBehaviour:
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 114028290153491770, guid: ba837b6110dff5f4e994bec20ef3a9f5, type: 2}
-  mText: "\u7528\u6237\u540D\uFF1A"
+  mText: "\u5E74  \u9F84\uFF1A"
   mFontSize: 88
   mFontStyle: 0
   mAlignment: 0
@@ -1004,6 +1004,7 @@ GameObject:
   - component: {fileID: 801611964}
   - component: {fileID: 801611963}
   - component: {fileID: 801611962}
+  - component: {fileID: 801611965}
   m_Layer: 8
   m_Name: AgeInput
   m_TagString: Untagged
@@ -1037,12 +1038,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   label: {fileID: 907719091}
-  inputType: 2
-  onReturnKey: 0
-  keyboardType: 0
+  inputType: 0
+  onReturnKey: 1
+  keyboardType: 4
   hideInput: 0
-  validation: 0
-  characterLimit: 0
+  validation: 1
+  characterLimit: 3
   savedAs: 
   selectOnTab: {fileID: 0}
   activeTextColor: {r: 1, g: 1, b: 1, a: 1}
@@ -1113,6 +1114,17 @@ MonoBehaviour:
   mAtlas: {fileID: 114099971922274314, guid: 6c73fb9353b341646925a259d7f047f3, type: 2}
   mSpriteName: textbox-normal
   mFillCenter: 1
+--- !u!114 &801611965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 801611960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08f1f98a9339a3a4182a58d7d2ad9e78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &878761501
 GameObject:
   m_ObjectHideFlags: 0
@@ -1187,7 +1199,7 @@ MonoBehaviour:
   mFontStyle: 0
   mAlignment: 0
   mEncoding: 1
-  mMaxLineCount: 0
+  mMaxLineCount: 1
   mEffectStyle: 0
   mEffectColor: {r: 0, g: 0, b: 0, a: 1}
   mSymbols: 1
@@ -1277,7 +1289,7 @@ MonoBehaviour:
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 114028290153491770, guid: ba837b6110dff5f4e994bec20ef3a9f5, type: 2}
-  mText: "\u8BF7\u8F93\u5165\u5BC6\u7801..."
+  mText: "\u8BF7\u8F93\u5165\u5E74\u9F84..."
   mFontSize: 66
   mFontStyle: 0
   mAlignment: 0
@@ -1593,7 +1605,7 @@ MonoBehaviour:
   mFontStyle: 0
   mAlignment: 0
   mEncoding: 1
-  mMaxLineCount: 0
+  mMaxLineCount: 1
   mEffectStyle: 0
   mEffectColor: {r: 0, g: 0, b: 0, a: 1}
   mSymbols: 1
@@ -1817,6 +1829,7 @@ GameObject:
   - component: {fileID: 1469349405}
   - component: {fileID: 1469349404}
   - component: {fileID: 1469349403}
+  - component: {fileID: 1469349406}
   m_Layer: 8
   m_Name: NameInput
   m_TagString: Untagged
@@ -1850,8 +1863,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   label: {fileID: 878761503}
-  inputType: 2
-  onReturnKey: 0
+  inputType: 0
+  onReturnKey: 1
   keyboardType: 0
   hideInput: 0
   validation: 0
@@ -1926,6 +1939,17 @@ MonoBehaviour:
   mAtlas: {fileID: 114099971922274314, guid: 6c73fb9353b341646925a259d7f047f3, type: 2}
   mSpriteName: textbox-normal
   mFillCenter: 1
+--- !u!114 &1469349406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1469349401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3801d2d2a1864144951e1d01002e20b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1577897177
 GameObject:
   m_ObjectHideFlags: 0
@@ -2131,7 +2155,7 @@ MonoBehaviour:
   onReturnKey: 0
   keyboardType: 0
   hideInput: 0
-  validation: 0
+  validation: 4
   characterLimit: 0
   savedAs: 
   selectOnTab: {fileID: 0}
