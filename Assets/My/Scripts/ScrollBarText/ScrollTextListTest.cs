@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScrollTextList : MonoBehaviour
+public class ScrollTextListTest : MonoBehaviour
 {
     private void Update()
     {
