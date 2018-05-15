@@ -40,55 +40,68 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebbf080627224a44786e958729eb7601, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  font: {fileID: 11400000, guid: d7697c83b7b91a241a155eafa142c00b, type: 2}
+  font: {fileID: 0}
   effect: 1
   offsetCurve:
+    serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 2
+      time: 0
       value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
-    - time: 3
+    - serializedVersion: 2
+      time: 3
       value: 40
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   alphaCurve:
+    serializedVersion: 2
     m_Curve:
-    - time: 1
+    - serializedVersion: 2
+      time: 1
       value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
-    - time: 3
+    - serializedVersion: 2
+      time: 3
       value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   scaleCurve:
+    serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 2
+      time: 0
       value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
-    - time: 0.11967155
+    - serializedVersion: 2
+      time: 0.11967155
       value: 1.4135523
       inSlope: 5.9831142
       outSlope: 5.9831142
       tangentMode: 0
-    - time: 0.25
+    - serializedVersion: 2
+      time: 0.25
       value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

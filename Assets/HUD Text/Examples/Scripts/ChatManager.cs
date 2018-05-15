@@ -1,6 +1,6 @@
 //--------------------------------------------
 //            NGUI: HUD Text
-// Copyright © 2012 Tasharen Entertainment
+// Copyright ï¿½ 2012 Tasharen Entertainment
 //--------------------------------------------
 
 using UnityEngine;
@@ -52,7 +52,7 @@ public class ChatManager : MonoBehaviour
 
 		if (ct != null)
 		{
-			ct.Add(chatMessages[mCurrentMessage], Color.white, 2f);
+			ct.Add(chatMessages[mCurrentMessage].Replace("\\n", "\n"), Color.white, 2f);
 			cameraLookAt.target = mParticipants[mCurrentChatter].lookAt;
 		}
 

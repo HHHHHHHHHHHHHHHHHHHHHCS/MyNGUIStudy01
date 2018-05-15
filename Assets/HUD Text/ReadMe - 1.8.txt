@@ -1,20 +1,25 @@
 --------------------------------------------------
               NGUI: HUD Text
- Copyright © 2012-2013 Tasharen Entertainment
-                Version 1.8
+ Copyright © 2012-2014 Tasharen Entertainment
+                Version 1.11
 http://www.tasharen.com/forum/index.php?topic=997.0
 --------------------------------------------------
 
 Thank you for buying NGUI HUD Text!
 
+This version of HUDText has been tested with NGUI 3.4.9
+If you have NGUI 2.7.0 or earlier, delete the Examples and Scripts folders,
+then import the contents of the hudtext_ngui270.unitypackage instead.
+
 ----------------------------------------------
 !! IMPORTANT NOTE !!
 ----------------------------------------------
 
-Upon importing this package into a brand-new project, you will get compile errors!
-This is normal -- it only happens if NGUI is missing. You can import the full version of NGUI
-(if you have it), or double-click on the provided "ngui_distribution" package to import
-the Distribution Version.
+Upon importing this package into a brand-new project, you will get compile errors
+unless that project already has NGUI present! You'll need to import NGUI as well.
+If you don't have NGUI, but still want to use HUDText, then I am guessing you didn't
+read the package's description! But... you can still use HUDText. Get in touch with me
+via support@tasharen.com and I will hook you up.
 
 ----------------------------------------------
 
@@ -38,6 +43,10 @@ hudText.Add(-123f, Color.red, 0f);
 
 // This will show "Hello World!" and make it stay on the screen for 1 second before moving
 hudText.Add("Hello World!", Color.white, 1f);
+
+// If you don't want your numeric damage values to be added up, pass them as a string instead:
+float myDamage = 123f;
+hudText.Add(myDamage.ToString(), Color.red, 1f);
 
 ----------------------------------------------
 

@@ -10,6 +10,7 @@ using System.Collections.Generic;
 /// HUD text creates temporary on-screen text entries that are perfect for damage, effects, and messages.
 /// </summary>
 
+[ExecuteInEditMode]
 [AddComponentMenu("NGUI/Examples/HUD Text")]
 public class HUDText : MonoBehaviour
 {
@@ -35,17 +36,62 @@ public class HUDText : MonoBehaviour
 		return 0;
 	}
 
+	// Deprecated, use 'ambigiousFont' instead.
+	[HideInInspector][SerializeField] UIFont font;
+
 	/// <summary>
-	/// Font that will be used to create labels.
+	/// Font used by the labels.
 	/// </summary>
 
-	public UIFont font;
+	public UIFont bitmapFont;
+
+	/// <summary>
+	/// True type font used by the labels. Alternative to specifying a bitmap font ('font').
+	/// </summary>
+
+	public Font trueTypeFont;
+
+	/// <summary>
+	/// Size of the font to use for the popup list's labels.
+	/// </summary>
+
+	public int fontSize = 20;
+
+	/// <summary>
+	/// Font style used by the dynamic font.
+	/// </summary>
+
+	public FontStyle fontStyle = FontStyle.Normal;
+
+	/// <summary>
+	/// Whether the labels will have a gradient.
+	/// </summary>
+
+	public bool applyGradient = false;
+
+	/// <summary>
+	/// Gradient's top color.
+	/// </summary>
+
+	public Color gradientTop = Color.white;
+
+	/// <summary>
+	/// Gradient's bottom color.
+	/// </summary>
+
+	public Color gradienBottom = new Color(0.7f, 0.7f, 0.7f);
 
 	/// <summary>
 	/// Effect applied to the text.
 	/// </summary>
 
 	public UILabel.Effect effect = UILabel.Effect.None;
+
+	/// <summary>
+	/// Color of the effect, if used.
+	/// </summary>
+
+	public Color effectColor = Color.black;
 
 	/// <summary>
 	/// Curve used to move entries with time.
@@ -77,6 +123,35 @@ public class HUDText : MonoBehaviour
 	public bool isVisible { get { return mList.Count != 0; } }
 
 	/// <summary>
+	/// Font used by the HUD text. Conveniently wraps both dynamic and bitmap fonts into one property.
+	/// </summary>
+
+	public Object ambigiousFont
+	{
+		get
+		{
+			if (trueTypeFont != null) return trueTypeFont;
+			if (bitmapFont != null) return bitmapFont;
+			return font;
+		}
+		set
+		{
+			if (value is Font)
+			{
+				trueTypeFont = value as Font;
+				bitmapFont = null;
+				font = null;
+			}
+			else if (value is UIFont)
+			{
+				bitmapFont = value as UIFont;
+				trueTypeFont = null;
+				font = null;
+			}
+		}
+	}
+
+	/// <summary>
 	/// Create a new entry, reusing an old entry if necessary.
 	/// </summary>
 
@@ -100,8 +175,14 @@ public class HUDText : MonoBehaviour
 		ne.time = Time.realtimeSinceStartup;
 		ne.label = NGUITools.AddWidget<UILabel>(gameObject);
 		ne.label.name = counter.ToString();
+		ne.label.ambigiousFont = ambigiousFont;
+		ne.label.fontSize = fontSize;
+		ne.label.fontStyle = fontStyle;
+		ne.label.applyGradient = applyGradient;
+		ne.label.gradientTop = gradientTop;
+		ne.label.gradientBottom = gradienBottom;
 		ne.label.effectStyle = effect;
-		ne.label.bitmapFont = font;
+		ne.label.effectColor = effectColor;
 		ne.label.overflowMethod = UILabel.Overflow.ResizeFreely;
 
 		// Make it small so that it's invisible to start with
@@ -176,6 +257,7 @@ public class HUDText : MonoBehaviour
 		Entry ne = Create();
 		ne.stay = stayDuration;
 		ne.label.color = c;
+		ne.label.alpha = 0f;
 		ne.val = val;
 
 		if (isNumeric) ne.label.text = (val < 0f ? Mathf.RoundToInt(ne.val).ToString() : "+" + Mathf.RoundToInt(ne.val));
@@ -183,6 +265,71 @@ public class HUDText : MonoBehaviour
 
 		// Sort the list
 		mList.Sort(Comparison);
+	}
+
+	/// <summary>
+	/// Auto-upgrade legacy font references.
+	/// </summary>
+
+	void OnEnable ()
+	{
+		if (font != null)
+		{
+			if (font.isDynamic)
+			{
+				trueTypeFont = font.dynamicFont;
+				fontStyle = font.dynamicFontStyle;
+				mUseDynamicFont = true;
+			}
+			else if (bitmapFont == null)
+			{
+				bitmapFont = font;
+				mUseDynamicFont = false;
+			}
+			font = null;
+#if UNITY_EDITOR
+			UnityEditor.EditorUtility.SetDirty(this);
+#endif
+		}
+	}
+
+	bool mUseDynamicFont = false;
+
+	void OnValidate ()
+	{
+		Font ttf = trueTypeFont;
+		UIFont fnt = bitmapFont;
+
+		bitmapFont = null;
+		trueTypeFont = null;
+
+		if (ttf != null && (fnt == null || !mUseDynamicFont))
+		{
+			bitmapFont = null;
+			trueTypeFont = ttf;
+			mUseDynamicFont = true;
+		}
+		else if (fnt != null)
+		{
+			// Auto-upgrade from 3.0.2 and earlier
+			if (fnt.isDynamic)
+			{
+				trueTypeFont = fnt.dynamicFont;
+				fontStyle = fnt.dynamicFontStyle;
+				fontSize = fnt.defaultSize;
+				mUseDynamicFont = true;
+			}
+			else
+			{
+				bitmapFont = fnt;
+				mUseDynamicFont = false;
+			}
+		}
+		else
+		{
+			trueTypeFont = ttf;
+			mUseDynamicFont = true;
+		}
 	}
 
 	/// <summary>
@@ -205,7 +352,10 @@ public class HUDText : MonoBehaviour
 
 	void Update ()
 	{
-		float time = Time.realtimeSinceStartup;
+#if UNITY_EDITOR
+		if (!Application.isPlaying) return;
+#endif
+		float time = RealTime.time;
 
 		Keyframe[] offsets = offsetCurve.keys;
 		Keyframe[] alphas = alphaCurve.keys;
@@ -242,7 +392,7 @@ public class HUDText : MonoBehaviour
 			Entry ent = mList[--i];
 			offset = Mathf.Max(offset, ent.offset);
 			ent.label.cachedTransform.localPosition = new Vector3(0f, offset, 0f);
-			offset += Mathf.Round(ent.label.cachedTransform.localScale.y * font.defaultSize );
+			offset += Mathf.Round(ent.label.cachedTransform.localScale.y * ent.label.fontSize);
 		}
 	}
 }
